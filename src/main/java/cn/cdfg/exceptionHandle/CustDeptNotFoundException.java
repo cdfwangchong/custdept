@@ -1,6 +1,6 @@
 package cn.cdfg.exceptionHandle;
 
-public class SelfMailNotFoundException extends RuntimeException{
+public class CustDeptNotFoundException extends RuntimeException{
     private static final long serialVersionUID=1L;
 
     public String getMsg() {
@@ -22,7 +22,7 @@ public class SelfMailNotFoundException extends RuntimeException{
     private int resultCode;
     private String msg;
 
-    public SelfMailNotFoundException(int retCode, String msg) {
+    public CustDeptNotFoundException(int retCode, String msg) {
         this.resultCode = retCode;
         this.msg = msg;
     }

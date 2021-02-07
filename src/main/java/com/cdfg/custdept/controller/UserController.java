@@ -1,7 +1,7 @@
 package com.cdfg.custdept.controller;
 
 import cn.cdfg.exceptionHandle.ExceptionPrintMessage;
-import cn.cdfg.exceptionHandle.SelfMailNotFoundException;
+import cn.cdfg.exceptionHandle.CustDeptNotFoundException;
 import com.alibaba.fastjson.JSONObject;
 import com.cdfg.custdept.pojo.dto.Postvercode;
 import com.cdfg.custdept.pojo.dto.WechatCode;
@@ -64,7 +64,7 @@ public class UserController {
         } catch (Exception e) {
             logger.error(new ExceptionPrintMessage().errorTrackSpace(e));
             logger.error("获取注册用户信息存储过程的返回值异常");
-            throw new SelfMailNotFoundException(errCode,errMsg);
+            throw new CustDeptNotFoundException(errCode,errMsg);
         }
         int code = Integer.parseInt(param.get("ret_flag")) ;
         //写入日志
@@ -72,7 +72,7 @@ public class UserController {
         if ("1".equals(param.get("ret_flag"))) {
             return new Result<String>(code, LoginErrCode.getMsg(param.get("ret_flag")), null);
         }else {
-            throw new SelfMailNotFoundException(code,LoginErrCode.getMsg(param.get("ret_flag")));
+            throw new CustDeptNotFoundException(code,LoginErrCode.getMsg(param.get("ret_flag")));
         }
     }
 
@@ -105,12 +105,12 @@ public class UserController {
         } catch (Exception e) {
             logger.error(new ExceptionPrintMessage().errorTrackSpace(e));
             logger.error("取到登录用户信息存储过程的返回值异常");
-            throw new SelfMailNotFoundException(errCode9,errMsg9);
+            throw new CustDeptNotFoundException(errCode9,errMsg9);
         }
 
         if ("2002".equals(ret_flag)) {
             logger.error("未注册，无记录");
-            throw new SelfMailNotFoundException(errCode7,errMsg7);
+            throw new CustDeptNotFoundException(errCode7,errMsg7);
         }else {
             retparam.put("card_id",param.get("card_id"));
             retparam.put("tel_num",param.get("tel_num"));
@@ -159,7 +159,7 @@ public class UserController {
         } catch (Exception e) {
             logger.error(new ExceptionPrintMessage().errorTrackSpace(e));
             logger.error("生成验证码后写入表异常");
-            throw new SelfMailNotFoundException(errCode11,errMsg11);
+            throw new CustDeptNotFoundException(errCode11,errMsg11);
         }
         return new Result<String>(sucCode,sucMsg,"");
     }
@@ -185,11 +185,11 @@ public class UserController {
         } catch (Exception e) {
             logger.error(new ExceptionPrintMessage().errorTrackSpace(e));
             logger.error("验证码获取存返回值异常");
-            throw new SelfMailNotFoundException(errCode17,errMsg17);
+            throw new CustDeptNotFoundException(errCode17,errMsg17);
         }
         if (pvcode == null) {
             logger.error("该手机未获取验证码");
-            throw new SelfMailNotFoundException(errCode18,errMsg18);
+            throw new CustDeptNotFoundException(errCode18,errMsg18);
         }
         String orlCode = pvcode.getVercode();
         Date fsTime = pvcode.getFstime();
@@ -206,12 +206,12 @@ public class UserController {
         long minute=(timeOne-timeTwo)/(1000*60);//转化minute
         if (minute > 5) {
             logger.info("验证码已过期");
-            throw new SelfMailNotFoundException(errCode15,errMsg15);
+            throw new CustDeptNotFoundException(errCode15,errMsg15);
         }else if (userCode.equals(orlCode)) {
             return new Result<String>(sucCode,sucMsg,"");
         }else {
             logger.info("验证码错误");
-            throw new SelfMailNotFoundException(errCode16,errMsg16);
+            throw new CustDeptNotFoundException(errCode16,errMsg16);
         }
     }
 
@@ -252,7 +252,7 @@ public class UserController {
             } catch (Exception e) {
                 logger.error(new ExceptionPrintMessage().errorTrackSpace(e));
                 logger.error("获取openid存储过程的返回值异常");
-                throw new SelfMailNotFoundException(errCode8,errMsg8);
+                throw new CustDeptNotFoundException(errCode8,errMsg8);
             }
             //获得返回值
             ret_flag=param.get("ret_flag");
@@ -272,7 +272,7 @@ public class UserController {
 
                 logger.info("errcode:"+errcode+";"+"errmsg:"+errmsg);
                 logger.info("ret_result（返回结果）:"+"errcode:"+errcode+"errmsg:"+errmsg);
-                throw new SelfMailNotFoundException(errCode8,errMsg8);
+                throw new CustDeptNotFoundException(errCode8,errMsg8);
             }
 
         return new Result<Map>(sucCode,sucMsg,retparam);

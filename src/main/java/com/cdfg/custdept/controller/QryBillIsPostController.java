@@ -1,6 +1,6 @@
 package com.cdfg.custdept.controller;
 
-import cn.cdfg.exceptionHandle.SelfMailNotFoundException;
+import cn.cdfg.exceptionHandle.CustDeptNotFoundException;
 import com.cdfg.custdept.pojo.dto.XsdnoDto;
 import com.cdfg.custdept.pojo.until.BillEntity;
 import com.cdfg.custdept.pojo.until.CustAddrlistEntity;
@@ -42,7 +42,7 @@ public class QryBillIsPostController {
 
         if (login == null){
             logger.error("邮寄提货单查询接口传入的参数值为null");
-            throw new SelfMailNotFoundException(errCode5,errMsg5);
+            throw new CustDeptNotFoundException(errCode5,errMsg5);
         }
         xsdnoDto = qbipService.qryNotPostBill(login);
         for (int i = 0; i < xsdnoDto.getOrderList().size(); i++) {
@@ -64,7 +64,7 @@ public class QryBillIsPostController {
 
         if (login == null){
             logger.error("邮寄提货单查询接口传入的参数值为null");
-            throw new SelfMailNotFoundException(errCode5,errMsg5);
+            throw new CustDeptNotFoundException(errCode5,errMsg5);
         }
         beList = qbipService.qryPostBill(login);
         for (int i = 0; i < beList.size(); i++) {

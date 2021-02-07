@@ -1,7 +1,7 @@
 package com.cdfg.custdept.service.Impl;
 
 import cn.cdfg.exceptionHandle.ExceptionPrintMessage;
-import cn.cdfg.exceptionHandle.SelfMailNotFoundException;
+import cn.cdfg.exceptionHandle.CustDeptNotFoundException;
 import com.cdfg.custdept.dao.PostaddressDao;
 import com.cdfg.custdept.dao.UserlistDao;
 import com.cdfg.custdept.pojo.dto.Jcyysjinfo;
@@ -50,11 +50,11 @@ public class PostAddressServiceImpl implements PostAddressService {
                         paDto.getYysj()+paDto.getYyseq());
             }else {
                 logger.error("获取到的对象值为空");
-                throw new SelfMailNotFoundException(errCode19,errMsg19);
+                throw new CustDeptNotFoundException(errCode19,errMsg19);
             }
         } catch (Exception e) {
             logger.error(gwkh+"无预约信息");
-            throw new SelfMailNotFoundException(errCode14,errMsg);
+            throw new CustDeptNotFoundException(errCode14,errMsg);
         }
         return paDto;
     }
@@ -84,20 +84,20 @@ public class PostAddressServiceImpl implements PostAddressService {
             }
             if (param.get("ret_flag").equals("1002")) {
                 logger.info("顾客"+ul.getName()+"有未取货的寄存商品，不可以重新预约");
-                throw new SelfMailNotFoundException(errCode,"顾客"+ul.getName()+"有未取货的寄存商品，不可以重新预约");
+                throw new CustDeptNotFoundException(errCode,"顾客"+ul.getName()+"有未取货的寄存商品，不可以重新预约");
             }
             if (param.get("ret_flag").equals("1003")) {
                 logger.info("顾客"+ul.getName()+"新增预约信息异常");
-                throw new SelfMailNotFoundException(errCode,"顾客"+ul.getName()+"新增预约信息异常");
+                throw new CustDeptNotFoundException(errCode,"顾客"+ul.getName()+"新增预约信息异常");
             }
             if (param.get("ret_flag").equals("1004")) {
                 logger.info("预约第二天寄存取货，要在16:00前");
-                throw new SelfMailNotFoundException(errCode,"预约第二天寄存取货，要在16:00前");
+                throw new CustDeptNotFoundException(errCode,"预约第二天寄存取货，要在16:00前");
             }
         } catch (Exception e) {
             logger.error(new ExceptionPrintMessage().errorTrackSpace(e));
             logger.error("预约信息写入异常");
-            throw new SelfMailNotFoundException(errCode,errMsg);
+            throw new CustDeptNotFoundException(errCode,errMsg);
         }
         return result;
     }
@@ -125,24 +125,24 @@ public class PostAddressServiceImpl implements PostAddressService {
             }
             if (param.get("ret_flag").equals("1001")) {
                 logger.info("顾客"+ul.getName()+"预约信息已经被修改过，不可以多次更新");
-                throw new SelfMailNotFoundException(errCode,"预约信息已经被修改过，不可以多次更新");
+                throw new CustDeptNotFoundException(errCode,"预约信息已经被修改过，不可以多次更新");
             }
             if (param.get("ret_flag").equals("1002")) {
                 logger.info("顾客"+ul.getName()+"预约信息不存在");
-                throw new SelfMailNotFoundException(errCode,"顾客"+ul.getName()+"预约信息不存在");
+                throw new CustDeptNotFoundException(errCode,"顾客"+ul.getName()+"预约信息不存在");
             }
             if (param.get("ret_flag").equals("1003")) {
                 logger.info("顾客"+ul.getName()+"更新预约信息写入表异常");
-                throw new SelfMailNotFoundException(errCode,"顾客"+ul.getName()+"更新预约信息写入表异常");
+                throw new CustDeptNotFoundException(errCode,"顾客"+ul.getName()+"更新预约信息写入表异常");
             }
             if (param.get("ret_flag").equals("1004")) {
                 logger.info("取货时间小于48内的预约申请，要在16:00前提交");
-                throw new SelfMailNotFoundException(errCode,"取货时间小于48内的预约申请，要在16:00前提交");
+                throw new CustDeptNotFoundException(errCode,"取货时间小于48内的预约申请，要在16:00前提交");
             }
         } catch (Exception e) {
             logger.error(new ExceptionPrintMessage().errorTrackSpace(e));
             logger.error("邮寄地址管理表更新异常");
-            throw new SelfMailNotFoundException(errCode,errMsg);
+            throw new CustDeptNotFoundException(errCode,errMsg);
         }
         return result;
     }

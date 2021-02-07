@@ -1,6 +1,6 @@
 package com.cdfg.custdept.controller;
 
-import cn.cdfg.exceptionHandle.SelfMailNotFoundException;
+import cn.cdfg.exceptionHandle.CustDeptNotFoundException;
 import com.cdfg.custdept.pojo.dto.InsertCustAddrAndListDto;
 import com.cdfg.custdept.pojo.until.BillEntity;
 import com.cdfg.custdept.pojo.until.Result;
@@ -37,7 +37,7 @@ public class CustAddrListController {
         if (bl) {
             return new Result<String>(sucCode,sucMsg,"");
         }else {
-            throw new SelfMailNotFoundException(errCode3,errMsg3);
+            throw new CustDeptNotFoundException(errCode3,errMsg3);
         }
     }
 }

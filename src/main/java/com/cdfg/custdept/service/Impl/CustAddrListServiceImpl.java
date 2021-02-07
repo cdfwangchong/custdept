@@ -1,7 +1,7 @@
 package com.cdfg.custdept.service.Impl;
 
 import cn.cdfg.exceptionHandle.ExceptionPrintMessage;
-import cn.cdfg.exceptionHandle.SelfMailNotFoundException;
+import cn.cdfg.exceptionHandle.CustDeptNotFoundException;
 import com.cdfg.custdept.dao.CheckCanclePostDao;
 import com.cdfg.custdept.dao.CustaddrlistDao;
 import com.cdfg.custdept.dao.UserlistDao;
@@ -115,7 +115,7 @@ public class CustAddrListServiceImpl implements CustAddrListService {
                         pcgCntml++;
                         pcgCntMap.put("6127",pcgCntml);
                     }else {
-                        throw new SelfMailNotFoundException(errCode2,errMsg2);
+                        throw new CustDeptNotFoundException(errCode2,errMsg2);
                     }
                 }
             }
@@ -140,12 +140,12 @@ public class CustAddrListServiceImpl implements CustAddrListService {
         } catch (Exception e) {
             logger.error(new ExceptionPrintMessage().errorTrackSpace(e));
             logger.error("寄存信息写入异常");
-            throw new SelfMailNotFoundException(errCode3,errMsg3);
+            throw new CustDeptNotFoundException(errCode3,errMsg3);
         }
             int ret = clDao.insert(icadList);
             if (ret != icadList.size()) {
                 logger.error("List中的数据没有正确写入顾客地址列表");
-                throw new SelfMailNotFoundException(errCode4,errMsg4);
+                throw new CustDeptNotFoundException(errCode4,errMsg4);
             }
 
         return true;

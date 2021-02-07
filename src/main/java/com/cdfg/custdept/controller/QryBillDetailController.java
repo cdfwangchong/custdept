@@ -2,7 +2,7 @@ package com.cdfg.custdept.controller;
 
 
 import cn.cdfg.exceptionHandle.ExceptionPrintMessage;
-import cn.cdfg.exceptionHandle.SelfMailNotFoundException;
+import cn.cdfg.exceptionHandle.CustDeptNotFoundException;
 import com.cdfg.custdept.pojo.dto.PickBillDto;
 import com.cdfg.custdept.pojo.dto.PickNumDto;
 import com.cdfg.custdept.pojo.until.Result;
@@ -59,7 +59,7 @@ public class QryBillDetailController {
         } catch (Exception e) {
             logger.error(new ExceptionPrintMessage().errorTrackSpace(e));
             logger.error("提货单明细接口返回值异常");
-            throw new SelfMailNotFoundException(errCode,errMsg);
+            throw new CustDeptNotFoundException(errCode,errMsg);
         }
         return new Result<List<PickBillDto>>(resultCode,msg,orderItem);
     }

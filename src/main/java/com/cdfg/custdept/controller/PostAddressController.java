@@ -1,6 +1,6 @@
 package com.cdfg.custdept.controller;
 
-import cn.cdfg.exceptionHandle.SelfMailNotFoundException;
+import cn.cdfg.exceptionHandle.CustDeptNotFoundException;
 import com.cdfg.custdept.pojo.dto.Jcyysjinfo;
 import com.cdfg.custdept.pojo.dto.YysjDto;
 import com.cdfg.custdept.pojo.until.Login;
@@ -55,7 +55,7 @@ public class PostAddressController {
         if(rs == 1) {
             return new Result<String>(sucCode,sucMsg,"");
         }else {
-            throw new SelfMailNotFoundException(errCode,"新增预约信息失败");
+            throw new CustDeptNotFoundException(errCode,"新增预约信息失败");
         }
     }
 
@@ -68,7 +68,7 @@ public class PostAddressController {
         if (rs == 1) {
             return new Result<String>(sucCode,sucMsg,"");
         }else {
-            throw new SelfMailNotFoundException(errCode,"更新预约信息失败");
+            throw new CustDeptNotFoundException(errCode,"更新预约信息失败");
         }
     }
 }

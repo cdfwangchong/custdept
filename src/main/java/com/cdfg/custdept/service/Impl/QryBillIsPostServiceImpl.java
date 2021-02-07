@@ -1,7 +1,7 @@
 package com.cdfg.custdept.service.Impl;
 
 import cn.cdfg.exceptionHandle.ExceptionPrintMessage;
-import cn.cdfg.exceptionHandle.SelfMailNotFoundException;
+import cn.cdfg.exceptionHandle.CustDeptNotFoundException;
 import com.cdfg.custdept.dao.QryBillIsPostDao;
 import com.cdfg.custdept.pojo.dto.XsdnoDto;
 import com.cdfg.custdept.pojo.until.BillEntity;
@@ -51,13 +51,13 @@ public class QryBillIsPostServiceImpl implements QryBillIsPostService {
         } catch (Exception e) {
             logger.error(new ExceptionPrintMessage().errorTrackSpace(e));
             logger.error("查找未邮寄的提货单存储过程返回值异常");
-            throw new SelfMailNotFoundException(errCode,errMsg);
+            throw new CustDeptNotFoundException(errCode,errMsg);
         }
         //取出ret_flag
         String ret_flag = (String) param.get("ret_flag");
         if ("0".equals(ret_flag)) {
             logger.error("该日期使用邮寄提货的人数已经满");
-            throw new SelfMailNotFoundException(errCode6,errMsg6);
+            throw new CustDeptNotFoundException(errCode6,errMsg6);
         }
         return xsdnoDto;
     }
@@ -81,7 +81,7 @@ public class QryBillIsPostServiceImpl implements QryBillIsPostService {
         } catch (Exception e) {
             logger.error(new ExceptionPrintMessage().errorTrackSpace(e));
             logger.error("查找已邮寄的提货单存储过程返回值异常");
-            throw new SelfMailNotFoundException(errCode,errMsg);
+            throw new CustDeptNotFoundException(errCode,errMsg);
         }
         return beyList;
     }
