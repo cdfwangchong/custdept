@@ -1,0 +1,16 @@
+package com.cdfg.custdept.service;
+
+import com.cdfg.custdept.pojo.dto.XsdnoDto;
+import com.cdfg.custdept.pojo.until.CustAddrlistEntity;
+import com.cdfg.custdept.pojo.until.Login;
+
+import java.util.List;
+
+
+public interface QryBillIsPostService {
+
+    XsdnoDto qryNotPostBill(Login login);
+
+    List<CustAddrlistEntity> qryPostBill(Login login);
+
+}
