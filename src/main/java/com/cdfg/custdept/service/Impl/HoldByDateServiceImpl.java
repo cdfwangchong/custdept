@@ -23,14 +23,11 @@ public class HoldByDateServiceImpl implements HoldByDateService {
         if (hbdDto == null) {
             throw new CustDeptNotFoundException(errCode_5, errMsg_5);
         }
-        Date yysj = hbdDto.getYysj();
-        String market = hbdDto.getMarket();
-        String qhdd = hbdDto.getQhdd();
-
         Map param = new HashMap();
-        param.put("yysj",yysj);
-        param.put("market",market);
-        param.put("qhdd",qhdd);
+        param.put("yysj",hbdDto.getYysj());
+        param.put("market",hbdDto.getMarket());
+        param.put("qhdd",hbdDto.getQhdd());
+        param.put("zctype",hbdDto.getZctype());
         List<JcXsdbillEntity> beyList;
         try {
             hbdDao.qryCheckBill(param);

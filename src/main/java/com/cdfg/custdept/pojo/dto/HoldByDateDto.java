@@ -46,8 +46,16 @@ public class HoldByDateDto {
         this.tmpCode = tmpCode;
     }
 
+    public String getZctype() {
+        return zctype;
+    }
+
+    public void setZctype(String zctype) {
+        this.zctype = zctype;
+    }
+
     /**
-     * 装箱单号
+     * 取货地点
      */
     private String qhdd;
 
@@ -62,10 +70,19 @@ public class HoldByDateDto {
     @JsonFormat(pattern="yyyy-MM-dd",timezone = "GMT+8")
     private Date yysj;
 
-
-
+    /**
+     * 取货单号
+     */
     private String xsdno;
 
+    /**
+     * 装箱单号
+     */
     private String tmpCode;
+
+    /**
+     * 暂存类型
+     */
+    private String zctype;
 
 }

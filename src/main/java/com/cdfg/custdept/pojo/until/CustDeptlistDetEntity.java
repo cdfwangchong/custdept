@@ -1,5 +1,7 @@
 package com.cdfg.custdept.pojo.until;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.math.BigDecimal;
 import java.util.Date;
 
@@ -20,10 +22,12 @@ public class CustDeptlistDetEntity {
         this.market = market;
     }
 
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     public Date getYysj() {
         return yysj;
     }
 
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     public void setYysj(Date yysj) {
         this.yysj = yysj;
     }
@@ -60,6 +64,7 @@ public class CustDeptlistDetEntity {
 
     private String xsdno;
 
+    @JsonFormat(pattern="yyyy-MM-dd",timezone = "GMT+8")
     private BigDecimal yyseq;
 
     private String market;

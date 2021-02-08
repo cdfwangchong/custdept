@@ -41,13 +41,13 @@ public class QryBillIsPostController {
         XsdnoDto xsdnoDto;
 
         if (login == null){
-            logger.error("邮寄提货单查询接口传入的参数值为null");
+            logger.error("寄存提货单查询接口传入的参数值为null");
             throw new CustDeptNotFoundException(errCode5,errMsg5);
         }
         xsdnoDto = qbipService.qryNotPostBill(login);
         for (int i = 0; i < xsdnoDto.getOrderList().size(); i++) {
             BillEntity be = xsdnoDto.getOrderList().get(i);
-            logger.info("取到未邮寄提货单接口返回值："+be.getMarket()+"#"+be.getXsdno()+"#"+be.getShoughtpay());
+            logger.info("取到未寄存提货单接口返回值："+be.getMarket()+"#"+be.getXsdno()+"#"+be.getShoughtpay());
         }
         return new Result<XsdnoDto>(sucCode,sucMsg,xsdnoDto);
     }
@@ -57,7 +57,7 @@ public class QryBillIsPostController {
      * @param login
      * @return
      */
-    @PostMapping("/qrypostbill")
+    @PostMapping("/qrydepttbill")
     @ResponseBody
     public Result<List<CustDeptlistDetEntity>> qryPostBill(@RequestBody Login login) {
         List<CustDeptlistDetEntity> beList;

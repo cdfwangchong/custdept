@@ -54,7 +54,7 @@ public class PostAddressServiceImpl implements PostAddressService {
             }
         } catch (Exception e) {
             logger.error(gwkh+"无预约信息");
-            throw new CustDeptNotFoundException(errCode14,errMsg);
+            return new Jcyysjinfo();
         }
         return paDto;
     }

@@ -21,7 +21,8 @@
         (#{yysj,mode=IN,jdbcType=DATE},
         #{market,mode=IN,jdbcType=VARCHAR},
         #{qhdd,mode=IN,jdbcType=VARCHAR},
-         #{zcRc,mode=OUT,jdbcType=CURSOR,javaType=java.sql.ResultSet,resultMap=JcXsdbillEntity}
+        #{zctype,mode=IN,jdbcType=VARCHAR},
+        #{zcRc,mode=OUT,jdbcType=CURSOR,javaType=java.sql.ResultSet,resultMap=JcXsdbillEntity}
         )}
     </select>
 

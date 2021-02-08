@@ -4,7 +4,7 @@
   <insert id="insert" parameterType="java.util.List" useGeneratedKeys="false" >
       insert into CUSTDEPTLIST (SEQID, GWKH, TEL_NUM,
       MARKET, YYSJ, QHDD,XSDNO, PKGCNT, SEQID_C,YYSEQ,FSDATE)
-      select dbusrpos.SEQ_CUSTDEPTLIST.nextval,t.* from (
+      select DBUSRIT.SEQ_CUSTDEPTLIST.nextval,t.* from (
       <foreach collection="list" item="icaDto" index="index" separator="UNION ALL">
         select
             #{icaDto.gwkh,jdbcType=VARCHAR},
