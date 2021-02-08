@@ -1,6 +1,7 @@
 package com.cdfg.custdept.controller;
 
 import com.cdfg.custdept.pojo.dto.HoldByDateDto;
+import com.cdfg.custdept.pojo.until.JcXsdbillEntity;
 import com.cdfg.custdept.pojo.until.Result;
 import com.cdfg.custdept.service.HoldByDateService;
 import com.cdfg.custdept.pojo.until.Token;
@@ -9,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+
+import java.util.List;
 
 import static com.cdfg.custdept.pojo.until.Constant.sucCode;
 import static com.cdfg.custdept.pojo.until.Constant.sucMsg;
@@ -29,12 +32,12 @@ public class HoldByDateController {
      */
     @PostMapping("/qrycheckbill")
     @ResponseBody
-    public Result<String> qryCheckBill(@RequestBody HoldByDateDto hbdDto, HttpServletRequest request) {
+    public Result<List<JcXsdbillEntity>> qryCheckBill(@RequestBody HoldByDateDto hbdDto, HttpServletRequest request) {
         String token = request.getHeader("Authorization");
         String worknumber = new Token().CheckToken(token);
 //        String worknumber = "3859";
-        logger.info("获取到邮寄提货单查询接口的工号："+worknumber);
-        return new Result<String>(sucCode,sucMsg,hbdService.qryCheckBill(hbdDto));
+        logger.info("获取到暂存提货单查询接口的工号："+worknumber);
+        return new Result<List<JcXsdbillEntity>>(sucCode,sucMsg,hbdService.qryCheckBill(hbdDto));
     }
 
     /**

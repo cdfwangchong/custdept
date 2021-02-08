@@ -7,7 +7,7 @@ import java.util.Map;
 
 @Repository
 public interface HoldByDateDao {
-    SellHeadEntity qryCheckBill(String billNO);
+    Map qryCheckBill(Map param);
 
     Map insertDts(Map<String, String> param);
 }

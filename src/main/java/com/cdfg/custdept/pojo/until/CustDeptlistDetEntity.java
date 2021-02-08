@@ -3,7 +3,7 @@ package com.cdfg.custdept.pojo.until;
 import java.math.BigDecimal;
 import java.util.Date;
 
-public class CustAddrlistEntity {
+public class CustDeptlistDetEntity {
     public String getSeq_no() {
         return seq_no;
     }
@@ -12,7 +12,6 @@ public class CustAddrlistEntity {
         this.seq_no = seq_no;
     }
 
-
     public String getMarket() {
         return market;
     }
@@ -20,7 +19,6 @@ public class CustAddrlistEntity {
     public void setMarket(String market) {
         this.market = market;
     }
-
 
     public Date getYysj() {
         return yysj;
@@ -65,7 +63,4 @@ public class CustAddrlistEntity {
     private BigDecimal yyseq;
 
     private String market;
-
-
-
 }

@@ -20,11 +20,11 @@
     <select id="qryPostBill" statementType="CALLABLE" resultType="java.util.Map">
         {CALL dbusrit.if_postinfo.qry_custaddrlist
         (#{openId,mode=IN,jdbcType=VARCHAR},
-        #{yjRc,mode=OUT,jdbcType=CURSOR,javaType=java.sql.ResultSet,resultMap=CustAddrlistEntity}
+        #{yjRc,mode=OUT,jdbcType=CURSOR,javaType=java.sql.ResultSet,resultMap=CustDeptlistDetEntity}
         )}
     </select>
 
-    <resultMap type="com.cdfg.custdept.pojo.until.CustAddrlistEntity" id="CustAddrlistEntity">
+    <resultMap type="com.cdfg.custdept.pojo.until.CustDeptlistDetEntity" id="CustDeptlistDetEntity">
         <result column="seqno" property="seq_no"/>
         <result column="yysj" property="yysj"/>
         <result column="qhdd" property="qhdd"/>

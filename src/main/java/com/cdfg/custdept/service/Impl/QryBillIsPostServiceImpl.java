@@ -5,7 +5,7 @@ import cn.cdfg.exceptionHandle.CustDeptNotFoundException;
 import com.cdfg.custdept.dao.QryBillIsPostDao;
 import com.cdfg.custdept.pojo.dto.XsdnoDto;
 import com.cdfg.custdept.pojo.until.BillEntity;
-import com.cdfg.custdept.pojo.until.CustAddrlistEntity;
+import com.cdfg.custdept.pojo.until.CustDeptlistDetEntity;
 import com.cdfg.custdept.pojo.until.Login;
 import com.cdfg.custdept.service.QryBillIsPostService;
 import org.apache.log4j.Logger;
@@ -68,16 +68,16 @@ public class QryBillIsPostServiceImpl implements QryBillIsPostService {
      * @return
      */
     @Override
-    public List<CustAddrlistEntity> qryPostBill(Login login) {
+    public List<CustDeptlistDetEntity> qryPostBill(Login login) {
         Map param = new HashMap<String,String>();
         param.put("openId",login.getOpen_id());
-        List<CustAddrlistEntity> beyList;
+        List<CustDeptlistDetEntity> beyList;
 
         try {
             qbipDao.qryPostBill(param);
 
             //取出结果集
-            beyList = (List<CustAddrlistEntity>) param.get("yjRc");
+            beyList = (List<CustDeptlistDetEntity>) param.get("yjRc");
         } catch (Exception e) {
             logger.error(new ExceptionPrintMessage().errorTrackSpace(e));
             logger.error("查找已邮寄的提货单存储过程返回值异常");

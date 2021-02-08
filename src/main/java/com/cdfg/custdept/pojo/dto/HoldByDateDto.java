@@ -5,13 +5,37 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import java.util.Date;
 
 public class HoldByDateDto {
-
-    public String getBillNO() {
-        return billNO;
+    public String getMarket() {
+        return market;
     }
 
-    public void setBillNO(String billNO) {
-        this.billNO = billNO;
+    public void setMarket(String market) {
+        this.market = market;
+    }
+
+    public Date getYysj() {
+        return yysj;
+    }
+
+    @JsonFormat(pattern="yyyy-MM-dd",timezone = "GMT+8")
+    public void setYysj(Date yysj) {
+        this.yysj = yysj;
+    }
+
+    public String getQhdd() {
+        return qhdd;
+    }
+
+    public void setQhdd(String qhdd) {
+        this.qhdd = qhdd;
+    }
+
+    public String getXsdno() {
+        return xsdno;
+    }
+
+    public void setXsdno(String xsdno) {
+        this.xsdno = xsdno;
     }
 
     public String getTmpCode() {
@@ -22,27 +46,10 @@ public class HoldByDateDto {
         this.tmpCode = tmpCode;
     }
 
-    public String getMarket() {
-        return market;
-    }
-
-    public void setMarket(String market) {
-        this.market = market;
-    }
-
-    public Date getLdrq() {
-        return ldrq;
-    }
-
-    @JsonFormat(pattern="yyyy-MM-dd",timezone = "GMT+8")
-    public void setLdrq(Date ldrq) {
-        this.ldrq = ldrq;
-    }
-
     /**
      * 装箱单号
      */
-    private String tmpCode;
+    private String qhdd;
 
     /**
      * 门店
@@ -53,11 +60,12 @@ public class HoldByDateDto {
      * 离岛日期
      */
     @JsonFormat(pattern="yyyy-MM-dd",timezone = "GMT+8")
-    private Date ldrq;
+    private Date yysj;
 
-    /**
-     * 订单号
-     */
-    private String billNO;
+
+
+    private String xsdno;
+
+    private String tmpCode;
 
 }

@@ -3,7 +3,7 @@ package com.cdfg.custdept.controller;
 import cn.cdfg.exceptionHandle.CustDeptNotFoundException;
 import com.cdfg.custdept.pojo.dto.XsdnoDto;
 import com.cdfg.custdept.pojo.until.BillEntity;
-import com.cdfg.custdept.pojo.until.CustAddrlistEntity;
+import com.cdfg.custdept.pojo.until.CustDeptlistDetEntity;
 import com.cdfg.custdept.pojo.until.Login;
 import com.cdfg.custdept.pojo.until.Result;
 import com.cdfg.custdept.service.QryBillIsPostService;
@@ -59,8 +59,8 @@ public class QryBillIsPostController {
      */
     @PostMapping("/qrypostbill")
     @ResponseBody
-    public Result<List<CustAddrlistEntity>> qryPostBill(@RequestBody Login login) {
-        List<CustAddrlistEntity> beList;
+    public Result<List<CustDeptlistDetEntity>> qryPostBill(@RequestBody Login login) {
+        List<CustDeptlistDetEntity> beList;
 
         if (login == null){
             logger.error("邮寄提货单查询接口传入的参数值为null");
@@ -68,11 +68,11 @@ public class QryBillIsPostController {
         }
         beList = qbipService.qryPostBill(login);
         for (int i = 0; i < beList.size(); i++) {
-            CustAddrlistEntity be;
+            CustDeptlistDetEntity be;
             be = beList.get(i);
             logger.info("取到邮寄提货单接口返回值："+be.getXsdno()+be.getYyseq()+be.getQhdd()+be.getMarket());
         }
 
-        return new Result<List<CustAddrlistEntity>>(sucCode,sucMsg,beList);
+        return new Result<List<CustDeptlistDetEntity>>(sucCode,sucMsg,beList);
     }
 }
