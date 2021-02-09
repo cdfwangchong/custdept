@@ -1,5 +1,7 @@
 package com.cdfg.custdept.pojo.until;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.util.Date;
 
 public class JcXsdbillEntity {
@@ -43,8 +45,25 @@ public class JcXsdbillEntity {
         this.isth = isth;
     }
 
+    public String getZxdh() {
+        return zxdh;
+    }
+
+    public void setZxdh(String zxdh) {
+        this.zxdh = zxdh;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
     private String xsdno;
 
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     private Date yysj;
 
     private String qhdd;
@@ -52,4 +71,8 @@ public class JcXsdbillEntity {
     private String market;
 
     private String isth;
+
+    private String zxdh="";
+
+    private String status="";
 }

@@ -1,5 +1,6 @@
 package com.cdfg.custdept.pojo.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -35,6 +36,7 @@ public class Custdeptlist implements Serializable {
     /**
      * 预约时间
      */
+    @JsonFormat(pattern="yyyy-MM-dd",timezone = "GMT+8")
     private Date yysj;
 
     /**
@@ -81,6 +83,11 @@ public class Custdeptlist implements Serializable {
      * 预约序号
      */
     private BigDecimal yyseq;
+
+    /**
+     * 类型
+     */
+    private String type;
 
     private static final long serialVersionUID = 1L;
 }

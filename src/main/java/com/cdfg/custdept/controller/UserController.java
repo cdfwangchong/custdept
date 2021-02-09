@@ -228,6 +228,10 @@ public class UserController {
         Map<String,String> retparam=new HashMap<String,String>();
         String vercode = code.getVer_code();
         logger.info("取到code"+vercode);
+        String ret_flag;
+        String card_id;
+        String tel_num;
+        String user_name;
 
         JSONObject jsonObject;
         jsonObject = AuthUtil.doGetJson(vercode);
@@ -238,15 +242,31 @@ public class UserController {
             String openId = jsonObject.getString("openid");
             logger.info("token:"+token+";"+"openid:"+openId);
 
-            String ret = WxtxUtil.getWxtx(openId,token);
-
+            String ret = WxtxUtil.getWxtx(openId,token);//取到客人头像
             //获取到客人信息
             Map<String,String> param=new HashMap<String,String>();
             param.put("open_id", openId);
+            logger.info("获取到客人openid："+openId);
+            try{
+                registerservice.weChat(param);
+            } catch (Exception e) {
+                logger.error("获取openid存储过程的返回值异常");
+                throw new CustDeptNotFoundException(errCode8,errMsg8);
+            }
+            //获得返回值
+            ret_flag=param.get("ret_flag");
+            card_id=param.get("card_id");
+            tel_num=param.get("tel_num");
+            user_name=param.get("user_name");
+            //写入日志
+            logger.info("ret_result（返回结果）:"+ret_flag+card_id+tel_num+openId+user_name);
 
             retparam.put("open_id",openId);
             retparam.put("access_token",token);
             retparam.put("userinfo",ret);
+            retparam.put("tel_num",tel_num);
+            retparam.put("card_id",card_id);
+            retparam.put("user_name", user_name);
             logger.info("获取到客人openid："+openId+token+ret);
         }else {
             String errcode =  jsonObject.getString("errcode");

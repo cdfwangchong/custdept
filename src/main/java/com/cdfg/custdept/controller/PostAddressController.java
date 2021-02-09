@@ -37,7 +37,6 @@ public class PostAddressController {
         Jcyysjinfo pd = paService.qryPostAddress(login);
         logger.info("取到收货地址管理接口的传入参数"+login.getOpen_id());
 
-
         return new Result<Jcyysjinfo>(sucCode,sucMsg,pd);
     }
 

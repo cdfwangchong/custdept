@@ -1,6 +1,7 @@
 package com.cdfg.custdept.service.Impl;
 
 import cn.cdfg.exceptionHandle.CustDeptNotFoundException;
+import cn.cdfg.exceptionHandle.ExceptionPrintMessage;
 import com.cdfg.custdept.dao.HoldByDateDao;
 import com.cdfg.custdept.pojo.dto.HoldByDateDto;
 import com.cdfg.custdept.pojo.until.JcXsdbillEntity;
@@ -35,7 +36,7 @@ public class HoldByDateServiceImpl implements HoldByDateService {
             beyList = (List<JcXsdbillEntity>) param.get("zcRc");
 
         } catch (Exception e) {
-//            logger.error(new ExceptionPrintMessage().errorTrackSpace(e));
+            logger.error(new ExceptionPrintMessage().errorTrackSpace(e));
             logger.error("表数据查询返回值异常");
             throw new CustDeptNotFoundException(errCode_3, errMsg_3);
         }
@@ -58,6 +59,7 @@ public class HoldByDateServiceImpl implements HoldByDateService {
         param.put("xsdno",hbdDto.getXsdno());
         param.put("market",hbdDto.getMarket());
         param.put("yysj",hbdDto.getYysj());
+        param.put("qhdd",hbdDto.getQhdd());
         param.put("tmpCode",hbdDto.getTmpCode());
         try {
             hbdDao.insertDts(param);
@@ -67,6 +69,9 @@ public class HoldByDateServiceImpl implements HoldByDateService {
             throw new CustDeptNotFoundException(errCode_3, errMsg_3);
         }
         String tmpCode = (String) param.get("o_TmpCode");
+        String billno = (String) param.get("o_billno");
+        String isth = (String) param.get("o_isth");
+
         if (tmpCode == "") {
             logger.error("寄存日期暂存写入异常");
             throw new CustDeptNotFoundException(errCode, errMsg);

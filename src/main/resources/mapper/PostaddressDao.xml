@@ -19,23 +19,23 @@
     YYSEQ, GWKH, YYSJ, QHDD, PREYYSJ, PREQHDD, UPDFLAG, UPDTIME, UPDCNT, FSTIME, ISQH,
     ISYX
   </sql>
-   <select id="selectByPrimaryKey" parameterType="java.math.BigDecimal" resultMap="BaseResultMap">
+   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
         SELECT
        <include refid="Base_Column_List" />
          FROM (select
         <include refid="Base_Column_List" />
         from JCYYSJINFO
-        where GWKH = #{gwkh,jdbcType=VARCHAR}
-        order by GWKH DESC)
-        WHERE ROWNUM=1;
+        where GWKH = #{cardId,jdbcType=VARCHAR}
+        order by YYSEQ DESC)
+        WHERE ROWNUM=1
 
    </select>
 
   <select id="insert" statementType="CALLABLE" resultType="java.util.Map">
         {CALL dbusrit.IF_DEPTINFO.insert_yyrs
-        (#{gwkh,mode=IN,jdbcType=VARCHAR},
-        #{yysj,mode=IN,jdbcType=VARCHAR},
+        (#{yysj,mode=IN,jdbcType=TIMESTAMP},
         #{qhdd,mode=IN,jdbcType=VARCHAR},
+        #{gwkh,mode=IN,jdbcType=VARCHAR},
         #{ret_flag,mode=OUT,jdbcType=VARCHAR}
         )}
   </select>

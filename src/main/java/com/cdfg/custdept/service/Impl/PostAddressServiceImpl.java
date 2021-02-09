@@ -38,12 +38,12 @@ public class PostAddressServiceImpl implements PostAddressService {
     public Jcyysjinfo qryPostAddress(Login login) {
         //查出顾客的购物卡号
         Userlist ul = ulDao.selectByPrimaryKey(login.getOpen_id());
-        String gwkh = ul.getIdseq();//客人的购物卡号
-        logger.info("获取顾客地址前查出客人购物卡号"+gwkh);
+        String cardId = ul.getIdseq();//客人的购物卡号
+        logger.info("获取顾客地址前查出客人购物卡号"+cardId);
 
         Jcyysjinfo paDto;
         try {
-            paDto = paDao.selectByPrimaryKey(gwkh);
+            paDto = paDao.selectByPrimaryKey(cardId);
 
             if (paDto != null) {
                 logger.info("取到顾客"+ul.getName()+"的预约信息"+paDto.getQhdd()+
@@ -53,7 +53,8 @@ public class PostAddressServiceImpl implements PostAddressService {
                 throw new CustDeptNotFoundException(errCode19,errMsg19);
             }
         } catch (Exception e) {
-            logger.error(gwkh+"无预约信息");
+            logger.error(cardId+"无预约信息");
+//            throw new CustDeptNotFoundException(errCode19,errMsg19);
             return new Jcyysjinfo();
         }
         return paDto;
@@ -119,6 +120,11 @@ public class PostAddressServiceImpl implements PostAddressService {
             param.put("preqhdd",ipaDto.getPreqhdd());
 
             paDao.updateByPrimaryKey(param);
+        } catch (Exception e) {
+            logger.error(new ExceptionPrintMessage().errorTrackSpace(e));
+            logger.error("邮寄地址管理表更新异常");
+            throw new CustDeptNotFoundException(errCode,errMsg);
+        }
             if (param.get("ret_flag").equals("1000")) {
                 logger.info("顾客"+ul.getName()+"预约信息新增成功");
                 result = 1;
@@ -139,11 +145,12 @@ public class PostAddressServiceImpl implements PostAddressService {
                 logger.info("取货时间小于48内的预约申请，要在16:00前提交");
                 throw new CustDeptNotFoundException(errCode,"取货时间小于48内的预约申请，要在16:00前提交");
             }
-        } catch (Exception e) {
-            logger.error(new ExceptionPrintMessage().errorTrackSpace(e));
-            logger.error("邮寄地址管理表更新异常");
-            throw new CustDeptNotFoundException(errCode,errMsg);
+
+        if (param.get("ret_flag").equals("1005")) {
+            logger.info("取货时间小于48内的预约申请，要在16:00前提交");
+            throw new CustDeptNotFoundException(errCode,"修改取货时间，须提前48内预约申请");
         }
+
         return result;
     }
 }

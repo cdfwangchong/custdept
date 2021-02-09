@@ -131,6 +131,8 @@ public class CustAddrListServiceImpl implements CustAddrListService {
                     icaDto.setSeqidC(ica.getSeq_no());
                     icaDto.setXsdno(entry.getValue());
                     icaDto.setTelNum(telphno);
+                    icaDto.setYysj(ica.getYysj());
+                    icaDto.setType(ica.getType());
                     icadList.add(icaDto);
 
                     //将客人的邮寄信息写入日志

@@ -8,11 +8,11 @@
         #{operator,mode=IN,jdbcType=VARCHAR},
         #{yysj,mode=IN,jdbcType=DATE},
         #{market,mode=IN,jdbcType=VARCHAR},
-        #{qhdd,mode=IN,jdbcType=VARCHAR},
         #{tmpCode,mode=IN,jdbcType=VARCHAR},
+        #{qhdd,mode=IN,jdbcType=VARCHAR},
         #{o_TmpCode,mode=OUT,jdbcType=VARCHAR},
         #{o_billno,mode=OUT,jdbcType=VARCHAR},
-        #{o_isth,mode=OUT,jdbcType=VARCHAR},
+        #{o_isth,mode=OUT,jdbcType=VARCHAR}
         )}
   </select>
 
@@ -32,6 +32,7 @@
         <result column="qhdd" property="qhdd"/>
         <result column="market" property="market"/>
         <result column="isth" property="isth"/>
+        <result column="zxdh" property="zxdh"/>
     </resultMap>
 
 </mapper>
