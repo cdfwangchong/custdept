@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cdfg.custdept.dao.CustJczgDao">
+    <select id="QryCustJczg" statementType="CALLABLE" resultType="java.util.Map">
+    {CALL if_deptinfo.qry_custjczg
+        (
+        #{jcRc,mode=OUT,jdbcType=CURSOR,javaType=java.sql.ResultSet,resultMap=CustJczg}
+        )}
+    </select>
+
+    <resultMap type="com.cdfg.custdept.pojo.dto.CustJczgDto" id="CustJczg">
+        <result column="gmname" property="gmname"/>
+        <result column="gmzjlb" property="gmzjlb"/>
+        <result column="gmzjno" property="gmzjno"/>
+    </resultMap>
+
+    <update id="update" parameterType="java.util.List" useGeneratedKeys="false" >
+        <foreach collection="list" item="icaDto" index="index" open="begin" close=";end;" separator=";">
+            UPDATE dbusrlimt.gwk_main
+            <set>
+                <if test="icaDto.isdm != null">
+                    gmismember = #{icaDto.isdm,jdbcType=VARCHAR}
+                </if>
+            </set>
+            <where>
+                <if test="icaDto.gmzjno != null">
+                    GMZJNO = #{icaDto.gmzjno,jdbcType=VARCHAR}
+                </if>
+            </where>
+        </foreach>
+    </update>
+</mapper>

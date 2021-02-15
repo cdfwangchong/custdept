@@ -52,4 +52,11 @@ public class LoginController {
 
         return new Result<Map<String, Object>>(sucCode,sucMsg,tokenMap);
     }
+
+
+    @PostMapping(value = "/task")
+    @ResponseBody
+    public void task(@RequestBody UserDto thduser){
+        loginserice.task();
+    }
 }

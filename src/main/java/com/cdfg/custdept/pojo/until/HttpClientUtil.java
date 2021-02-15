@@ -35,9 +35,9 @@ public class HttpClientUtil {
             //开始组装报文,第一层json
             JSONObject json = new JSONObject();
             //将jsonlist放到第一层的json中
-            json.put("idcardType", all.getBuyerName());
+            json.put("idcardType", all.getIdcardType());
             json.put("idcardNo", all.getIdcardNo());
-            json.put("buyerName", all.getIdcardType());
+            json.put("buyerName", all.getBuyerName());
 
             //报文组装完成，开始发送
             StringEntity s = new StringEntity(json.toString());

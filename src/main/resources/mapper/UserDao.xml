@@ -47,7 +47,8 @@
 		 #{card_id,mode=OUT,jdbcType=VARCHAR},
 		 #{tel_num,mode=OUT,jdbcType=VARCHAR},
 		 #{user_name,mode=OUT,jdbcType=VARCHAR},
-		 #{id_type,mode=OUT,jdbcType=VARCHAR}
+		 #{id_type,mode=OUT,jdbcType=VARCHAR},
+		 #{isdm,mode=OUT,jdbcType=VARCHAR}
 		)}
 	</select>
 
