@@ -1,6 +1,7 @@
 package com.cdfg.custdept.dao;
 
 import com.cdfg.custdept.pojo.dto.DmzgDto;
+import com.cdfg.custdept.pojo.until.CustTrip;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -11,5 +12,9 @@ public interface CustJczgDao {
 
     Map QryCustJczg(Map param);
 
-    int update(List<DmzgDto> record);
+    int Update(List<DmzgDto> record);
+
+    Map QryCustTrip(Map param);
+
+    int UpdateTrip(List<CustTrip> record);
 }
