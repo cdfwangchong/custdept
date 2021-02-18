@@ -30,7 +30,6 @@
         WHERE ROWNUM=1
 
    </select>
-
   <select id="insert" statementType="CALLABLE" resultType="java.util.Map">
         {CALL dbusrit.IF_DEPTINFO.insert_yyrs
         (#{yysj,mode=IN,jdbcType=TIMESTAMP},
@@ -39,7 +38,6 @@
         #{ret_flag,mode=OUT,jdbcType=VARCHAR}
         )}
   </select>
-
   <select id="updateByPrimaryKey" statementType="CALLABLE" resultType="java.util.Map">
         {CALL dbusrit.IF_DEPTINFO.update_yyrs
         (#{yysj,mode=IN,jdbcType=TIMESTAMP},
@@ -50,5 +48,4 @@
         #{ret_flag,mode=OUT,jdbcType=VARCHAR}
         )}
   </select>
-
 </mapper>

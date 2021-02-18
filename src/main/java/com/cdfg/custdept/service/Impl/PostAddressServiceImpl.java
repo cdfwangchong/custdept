@@ -37,7 +37,12 @@ public class PostAddressServiceImpl implements PostAddressService {
     @Override
     public Jcyysjinfo qryPostAddress(Login login) {
         //查出顾客的购物卡号
-        Userlist ul = ulDao.selectByPrimaryKey(login.getOpen_id());
+        Userlist ul = null;
+        try {
+            ul = ulDao.selectByPrimaryKey(login.getOpen_id());
+        } catch (Exception e) {
+            logger.error(login.getOpen_id()+"不存在");
+        }
         String cardId = ul.getIdseq();//客人的购物卡号
         logger.info("获取顾客地址前查出客人购物卡号"+cardId);
 
@@ -54,7 +59,6 @@ public class PostAddressServiceImpl implements PostAddressService {
             }
         } catch (Exception e) {
             logger.error(cardId+"无预约信息");
-//            throw new CustDeptNotFoundException(errCode19,errMsg19);
             return new Jcyysjinfo();
         }
         return paDto;
