@@ -41,7 +41,6 @@ public class QryBillDetailController {
         logger.info("提货单明细接口收到的数据："+pick_num);
         try{
             orderItem = selldetailService.getselldetail(picknumdto);
-
             if (orderItem != null) {
                 resultCode = sucCode;
                 msg = sucMsg;

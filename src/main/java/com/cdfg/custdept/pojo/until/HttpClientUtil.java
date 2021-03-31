@@ -18,6 +18,7 @@ public class HttpClientUtil {
 
     public JSONObject doPost(TableInfo all){
         String url="http://10.190.3.4:7100/rxp/buyer/check";//测试地址
+//        String url="http://10.190.2.18:7100/rxp/buyer/check";//测试地址
 
         HttpPost post = new HttpPost(url);
         CloseableHttpClient httpclient = HttpClientBuilder.create().build();

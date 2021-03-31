@@ -14,7 +14,7 @@ public final class Constant {
     public static String errMsg3 = "邮寄信息写入异常";
 
     public static int errCode4 = 1004;
-    public static String errMsg4 = "List中的数据没有正确写入顾客地址列表";
+    public static String errMsg4 = "数据没有正确写入顾客地址列表";
 
     public static int errCode5 = 1005;
     public static String errMsg5 = "邮寄提货单查询接口传入的参数值为null";

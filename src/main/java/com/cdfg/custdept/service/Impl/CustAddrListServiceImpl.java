@@ -140,16 +140,20 @@ public class CustAddrListServiceImpl implements CustAddrListService {
                 }
             }
         } catch (Exception e) {
-            logger.error(new ExceptionPrintMessage().errorTrackSpace(e));
-            logger.error("寄存信息写入异常");
+            logger.error(gwkh+"寄存信息写入异常");
             throw new CustDeptNotFoundException(errCode3,errMsg3);
         }
-            int ret = clDao.insert(icadList);
-            if (ret != icadList.size()) {
-                logger.error("List中的数据没有正确写入顾客地址列表");
+        int ret = 0;
+        try {
+            ret = clDao.insert(icadList);
+        } catch (Exception e) {
+            logger.error(gwkh+"寄存信息写入异常");
+            throw new CustDeptNotFoundException(errCode3,errMsg3);
+        }
+        if (ret != icadList.size()) {
+                logger.error(gwkh+"数据没有正确写入");
                 throw new CustDeptNotFoundException(errCode4,errMsg4);
             }
-
         return true;
     }
 }

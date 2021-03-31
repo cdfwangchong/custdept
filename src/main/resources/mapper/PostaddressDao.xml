@@ -35,7 +35,8 @@
         (#{yysj,mode=IN,jdbcType=TIMESTAMP},
         #{qhdd,mode=IN,jdbcType=VARCHAR},
         #{gwkh,mode=IN,jdbcType=VARCHAR},
-        #{ret_flag,mode=OUT,jdbcType=VARCHAR}
+        #{ret_flag,mode=OUT,jdbcType=VARCHAR},
+        #{ret_seq,mode=OUT,jdbcType=VARCHAR}
         )}
   </select>
   <select id="updateByPrimaryKey" statementType="CALLABLE" resultType="java.util.Map">
@@ -43,8 +44,8 @@
         (#{yysj,mode=IN,jdbcType=TIMESTAMP},
         #{qhdd,mode=IN,jdbcType=VARCHAR},
         #{preyysj,mode=IN,jdbcType=TIMESTAMP},
-        #{preqhdd,mode=OUT,jdbcType=VARCHAR},
-        #{yyseq,mode=OUT,jdbcType=DECIMAL},
+        #{preqhdd,mode=IN,jdbcType=VARCHAR},
+        #{yyseq,mode=IN,jdbcType=DECIMAL},
         #{ret_flag,mode=OUT,jdbcType=VARCHAR}
         )}
   </select>

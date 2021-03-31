@@ -70,41 +70,54 @@ public class PostAddressServiceImpl implements PostAddressService {
      * @return
      */
     @Override
-    public int insertPostAddress(YysjDto ipdDto) {
+    public Map insertPostAddress(YysjDto ipdDto) {
         //查出顾客的购物卡号
         Userlist ul = ulDao.selectByPrimaryKey(ipdDto.getOpen_id());
         ipdDto.setGwkh(ul.getIdseq());
         logger.info("新增预约信息前查出客人购物卡号"+ul.getIdseq());
-        int result = 0;
         Map param = new HashMap<String,String>();
+        Map retparam = new HashMap<String,String>();
+        String ret_flag=null;
         try {
             param.put("gwkh",ipdDto.getGwkh());
             param.put("yysj",ipdDto.getYysj());
             param.put("qhdd",ipdDto.getQhdd());
 
             paDao.insert(param);
-            if (param.get("ret_flag").equals("1000")) {
-                logger.info("顾客"+ul.getName()+"预约信息新增成功");
-                result = 1;
-            }
-            if (param.get("ret_flag").equals("1002")) {
-                logger.info("顾客"+ul.getName()+"有未取货的寄存商品，不可以重新预约");
-                throw new CustDeptNotFoundException(errCode,"顾客"+ul.getName()+"有未取货的寄存商品，不可以重新预约");
-            }
-            if (param.get("ret_flag").equals("1003")) {
-                logger.info("顾客"+ul.getName()+"新增预约信息异常");
-                throw new CustDeptNotFoundException(errCode,"顾客"+ul.getName()+"新增预约信息异常");
-            }
-            if (param.get("ret_flag").equals("1004")) {
-                logger.info("预约第二天寄存取货，要在16:00前");
-                throw new CustDeptNotFoundException(errCode,"预约第二天寄存取货，要在16:00前");
-            }
         } catch (Exception e) {
             logger.error(new ExceptionPrintMessage().errorTrackSpace(e));
             logger.error("预约信息写入异常");
             throw new CustDeptNotFoundException(errCode,errMsg);
         }
-        return result;
+            ret_flag = (String) param.get("ret_flag");
+            if (ret_flag.equals("1000")) {
+                logger.info("顾客"+ul.getName()+"预约信息新增成功");
+            }
+            if (ret_flag.equals("1002")) {
+                logger.info("顾客"+ul.getName()+"有未取货的寄存商品，不可以重新预约");
+                throw new CustDeptNotFoundException(errCode,"顾客"+ul.getName()+"有未取货的寄存商品，不可以重新预约");
+            }
+            if (ret_flag.equals("1003")) {
+                logger.info("顾客"+ul.getName()+"新增预约信息异常");
+                throw new CustDeptNotFoundException(errCode,"顾客"+ul.getName()+"新增预约信息异常");
+            }
+            if (ret_flag.equals("1004")) {
+                logger.info("预约第二天寄存取货，要在16:00前");
+                throw new CustDeptNotFoundException(errCode,"预约第二天寄存取货，要在16:00前");
+            }
+            if (ret_flag.equals("1005")) {
+                logger.info("没有成行记录，不可以登记预约信息");
+                throw new CustDeptNotFoundException(errCode,"没有成行记录，不可以登记预约信息");
+            }
+            if (ret_flag.equals("1006")) {
+                logger.info("预约时间不能小于当前时间");
+                throw new CustDeptNotFoundException(errCode,"预约时间不能小于当前时间");
+            }
+            if (ret_flag.equals("1007")) {
+                logger.info("没有成行记录，不可以登记预约信息");
+                throw new CustDeptNotFoundException(errCode,"预约第二天寄存取货，要在16:00前");
+            }
+        return retparam;
     }
 
     @Override
@@ -129,32 +142,32 @@ public class PostAddressServiceImpl implements PostAddressService {
             logger.error("邮寄地址管理表更新异常");
             throw new CustDeptNotFoundException(errCode,errMsg);
         }
-            if (param.get("ret_flag").equals("1000")) {
+            String ret_flag = (String) param.get("ret_flag");
+            if (ret_flag.equals("1000")) {
                 logger.info("顾客"+ul.getName()+"预约信息新增成功");
                 result = 1;
             }
-            if (param.get("ret_flag").equals("1001")) {
+            if (ret_flag.equals("1001")) {
                 logger.info("顾客"+ul.getName()+"预约信息已经被修改过，不可以多次更新");
                 throw new CustDeptNotFoundException(errCode,"预约信息已经被修改过，不可以多次更新");
             }
-            if (param.get("ret_flag").equals("1002")) {
+            if (ret_flag.equals("1002")) {
                 logger.info("顾客"+ul.getName()+"预约信息不存在");
                 throw new CustDeptNotFoundException(errCode,"顾客"+ul.getName()+"预约信息不存在");
             }
-            if (param.get("ret_flag").equals("1003")) {
+            if (ret_flag.equals("1003")) {
                 logger.info("顾客"+ul.getName()+"更新预约信息写入表异常");
                 throw new CustDeptNotFoundException(errCode,"顾客"+ul.getName()+"更新预约信息写入表异常");
             }
-            if (param.get("ret_flag").equals("1004")) {
+            if (ret_flag.equals("1004")) {
                 logger.info("取货时间小于48内的预约申请，要在16:00前提交");
                 throw new CustDeptNotFoundException(errCode,"取货时间小于48内的预约申请，要在16:00前提交");
             }
 
-        if (param.get("ret_flag").equals("1005")) {
-            logger.info("取货时间小于48内的预约申请，要在16:00前提交");
-            throw new CustDeptNotFoundException(errCode,"修改取货时间，须提前48内预约申请");
+        if (ret_flag.equals("1005")) {
+            logger.info("取货时间小于48小时内的预约申请，要在16:00前提交");
+            throw new CustDeptNotFoundException(errCode,"取货时间小于48小时内的预约申请，要在16:00前提交");
         }
-
         return result;
     }
 }

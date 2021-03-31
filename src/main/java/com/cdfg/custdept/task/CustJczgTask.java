@@ -33,7 +33,7 @@ public class CustJczgTask {
      *
      * @return
      */
-    @Scheduled(cron = "* */5 * * * *")
+//    @Scheduled(cron = "* */10 * * * *")
     public void qryJczgTask() {
         List<CustJczgDto> cjlist = null;
         List<DmzgDto> dmzglist = new ArrayList<DmzgDto>();
@@ -112,8 +112,8 @@ public class CustJczgTask {
     /**
      * 查询旅客的成行记录
      */
-//    @Scheduled(cron = "* */2 * * * *")
-    @Scheduled(cron = "* * 0-4 * * ?")//每天0-4点每小时执行一次
+    @Scheduled(cron = "* */10 * * * *")
+//    @Scheduled(cron = "* * 0-4 * * ?")//每天0-4点每小时执行一次
     public void QryCustTrip() {
         List<CustTripInfo> cjlist = null;
         List<CustTrip> ctlist = new ArrayList<CustTrip>();
@@ -161,7 +161,7 @@ public class CustJczgTask {
             if ("N".equals(flag) || "N1".equals(flag)) {
                 ct.setCxFlag("N");//error
                 ct.setPasNipp(pasNipp);
-                System.out.println(pasNipp);
+//                System.out.println(pasNipp);
                 ct.setFltNumber(fltNumber);
                 ct.setFltDate(fltDate);
                 ct.setPasName(pasName);

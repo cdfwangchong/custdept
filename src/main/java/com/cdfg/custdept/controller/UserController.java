@@ -181,7 +181,6 @@ public class UserController {
         try {
             pvcode = registerservice.selectByPrimaryKey(param);
         } catch (Exception e) {
-            logger.error(new ExceptionPrintMessage().errorTrackSpace(e));
             logger.error("验证码获取存返回值异常");
             throw new CustDeptNotFoundException(errCode17,errMsg17);
         }

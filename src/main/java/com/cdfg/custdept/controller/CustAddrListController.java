@@ -26,7 +26,7 @@ public class CustAddrListController {
     CustAddrListService calService = null;
     Logger logger = Logger.getLogger(CustAddrListController.class);
 
-    @PostMapping("insertCustAddr")
+    @PostMapping("insertdept")
     @ResponseBody
     public Result<String> insertCustAddrList(@RequestBody InsertCustAddrAndListDto ica){
         for (int i = 0; i < ica.getOrderList().size(); i++) {

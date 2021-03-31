@@ -8,7 +8,7 @@
       <foreach collection="list" item="icaDto" index="index" separator="UNION ALL">
         select
             #{icaDto.gwkh,jdbcType=VARCHAR},
-            #{icaDto.gwkh,jdbcType=VARCHAR},
+            #{icaDto.telNum,jdbcType=VARCHAR},
             #{icaDto.market,jdbcType=VARCHAR},
             #{icaDto.yysj,jdbcType=TIMESTAMP},
             #{icaDto.qhdd,jdbcType=VARCHAR},

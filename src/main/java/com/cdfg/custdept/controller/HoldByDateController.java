@@ -34,8 +34,8 @@ public class HoldByDateController {
     @ResponseBody
     public Result<List<JcXsdbillEntity>> qryCheckBill(@RequestBody HoldByDateDto hbdDto, HttpServletRequest request) {
         String token = request.getHeader("Authorization");
-//        String worknumber = new Token().CheckToken(token);
-        String worknumber = "3859";
+        String worknumber = new Token().CheckToken(token);
+//        String worknumber = "3859";
         logger.info("获取到暂存提货单查询接口的工号："+worknumber);
         return new Result<List<JcXsdbillEntity>>(sucCode,sucMsg,hbdService.qryCheckBill(hbdDto));
     }
@@ -48,8 +48,8 @@ public class HoldByDateController {
     @ResponseBody
     public Result<String> insertDts(@RequestBody HoldByDateDto hbdDto, HttpServletRequest request) {
         String token = request.getHeader("Authorization");
-//        String worknumber = new Token().CheckToken(token);
-        String worknumber = "3859";
+        String worknumber = new Token().CheckToken(token);
+//        String worknumber = "3859";
 
         String ctpCode = hbdService.insertDts(hbdDto,worknumber);
         return new Result<String>(sucCode,sucMsg,ctpCode);

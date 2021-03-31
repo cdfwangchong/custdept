@@ -10,6 +10,8 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Map;
+
 import static com.cdfg.custdept.pojo.until.Constant.*;
 
 /*
@@ -50,15 +52,16 @@ public class PostAddressController {
     public Result<String> insertPostAddress(@RequestBody YysjDto paDto) {
 
         logger.info("取到寄存新增预约信息接口的传入参数"+paDto.getOpen_id()+"详细地址："+paDto.getQhdd()+paDto.getYysj());
-        int rs = paService.insertPostAddress(paDto);
-        if(rs == 1) {
-            return new Result<String>(sucCode,sucMsg,"");
+        Map rs = paService.insertPostAddress(paDto);
+        if("1000".equals(rs.get("ret_flag"))) {
+            String ret_seq = (String) rs.get("ret_seq");
+            return new Result<String>(sucCode,sucMsg,ret_seq);
         }else {
             throw new CustDeptNotFoundException(errCode,"新增预约信息失败");
         }
     }
 
-    @PostMapping("updateyysinfo")
+    @PostMapping("updateyyinfo")
     @ResponseBody
     public Result<String> updatePostAddress(@RequestBody Jcyysjinfo paDto) {
 

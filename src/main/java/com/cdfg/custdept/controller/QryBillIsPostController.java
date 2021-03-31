@@ -39,7 +39,6 @@ public class QryBillIsPostController {
     @ResponseBody
     public Result<XsdnoDto> qryNotPostBill(@RequestBody Login login) {
         XsdnoDto xsdnoDto;
-
         if (login == null){
             logger.error("寄存提货单查询接口传入的参数值为null");
             throw new CustDeptNotFoundException(errCode5,errMsg5);
